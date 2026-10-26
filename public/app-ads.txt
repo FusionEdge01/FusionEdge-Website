@@ -1,5 +1,3 @@
-checking
-
 google.com, pub-6574413256245774, DIRECT, f08c47fec0942fa0
 
 facebook.com, 1172550445072956, DIRECT, c3e20eee3f780d68
@@ -1246,3 +1244,55 @@ zmaticoo.com,5135063,RESELLER
 zmaticoo.com,5135224,RESELLER
 zmaticoo.com,5135302,RESELLER
 zoomd.com,88478941,RESELLER
+
+monetrix.ai, 10761, RESELLER
+themediagrid.com, JVHG38, RESELLER, 9fac4a4a87c2a44f
+triplelift.com, 6998, RESELLER, 6c33edb13117fd86
+smartclip.net, 14679, RESELLER
+triplelift.com, 14709, RESELLER, 6c33edb13117fd86
+thunder-monetize.com, 2158729563, RESELLER
+nativo.com, 6089, RESELLER, 59521ca7cc5e9fee
+rubiconproject.com, 24084, RESELLER, 0bfd66d529a55807
+themediagrid.com, B8N9YH, RESELLER, 35d5010d7789b49d
+smartadserver.com, 3964, RESELLER
+openx.com, 565175463, RESELLER, 6a698e2ec38604c6
+lijit.com, 606973, RESELLER, fafdf38b16bf6b2b
+triplelift.com, 8614, RESELLER, 6c33edb13117fd86
+smaato.com, 1100059345, RESELLER, 07bcf65f187117b4
+stroeer.com, 17379, RESELLER
+loopme.com, 2896, RESELLER, 6c8d5f95897a5a3b
+media.net, 8CAXEGFDP, RESELLER
+openx.com, 559792583, RESELLER, 6a698e2ec38604c6
+adwmg.com, 159512, RESELLER, c9688a22012618e7
+sharethrough.com, 4568, RESELLER, d53b998a7bd4ecd2
+triplelift.com, 14705, RESELLER, 6c33edb13117fd86
+media.net, 8CUUQ286L, RESELLER
+verve.com, 1008379, RESELLER, 0c8f5958fc2d6270
+netmarvel.com, 1011828, RESELLER, ca3509163a633862
+pubmatic.com, 95054, RESELLER, 5d62403b186f2ace
+bold-win.com, 1189, RESELLER, 71746737d0bab951
+loopme.com, 20775, RESELLER, 6c8d5f95897a5a3b
+rubiconproject.com, 28341, RESELLER, 0bfd66d529a55807
+bigo.sg, adidz3dyfp, RESELLER
+connekt.ai, 5585919044, RESELLER
+zetaglobal.net, 525, RESELLER
+start.io, 131192070, RESELLER
+triplelift.com, 14705-EB, RESELLER
+spinx.biz, 1373698903, RESELLER, 9f2711e9aaa9f992
+brightmountainmedia.com, 2686958, RESELLER
+pubmatic.com, 165750, RESELLER, 5d62403b186f2ace
+bold-win.com, 1013, RESELLER, 71746737d0bab951
+e-planning.net, 79ded3cfca3d3b78, RESELLER, c1ba615865ed87b2
+video.unrulymedia.com, 201313863, RESELLER
+appnexus.com, 17973, RESELLER, f5ab79cb980f11d1
+taurusx.com, 70097, RESELLER
+pubmatic.com, 166385, RESELLER, 5d62403b186f2ace
+nativo.com, 5958, RESELLER, 59521ca7cc5e9fee
+vidoomy.com, 8953515, RESELLER
+odeeo.io, 118848844, RESELLER, 36cfd73091d5c3fc
+smartadserver.com, 4525, RESELLER, 060d053dcf45cbf3
+my-cast.tv, 987033, RESELLER, 8c33fe1bd714ffd7
+rubiconproject.com, 25060, RESELLER, 0bfd66d529a55807
+dauup.com, 34222, RESELLER, 4daba13e2b0dfd9
+vidazoo.com, 6a3384a48eca8f6ddad62520, RESELLER, b6ada874b4d7d0b2
+
