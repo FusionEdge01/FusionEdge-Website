@@ -1,0 +1,5 @@
+After downloading cli from firebase website and placing in this folder inside documents
+
+firebase init hosting
+
+firebase deploy --only hosting
