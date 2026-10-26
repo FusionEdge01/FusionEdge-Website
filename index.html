@@ -1,0 +1,1515 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FusionEdge Games — Next-Gen VR & Mobile Experiences</title>
+    <meta name="description" content="FusionEdge Games builds immersive, high-performance games for Play Store, App Store, Amazon Appstore, and Meta Store. VR-ready, tech-forward, player-first." />
+    <meta name="theme-color" content="#0a0b14" />
+
+    <!-- Optional: Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="source/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="source/favicon.ico" type="image/x-icon">
+
+    <!-- Optional PNG fallback -->
+    <link rel="icon" type="image/png" sizes="32x32" href="source/logo.png">
+
+
+    <style>
+        :root {
+            --bg: #070914;
+            --panel: rgba(255,255,255,0.06);
+            --panel2: rgba(255,255,255,0.08);
+            --stroke: rgba(255,255,255,0.12);
+            --text: rgba(255,255,255,0.92);
+            --muted: rgba(255,255,255,0.68);
+            --a1: #7c3aed; /* violet */
+            --a2: #22d3ee; /* cyan */
+            --a3: #f43f5e; /* rose */
+            --good: #22c55e;
+            --radius: 18px;
+            --shadow: 0 20px 60px rgba(0,0,0,0.45);
+            --glow: 0 0 18px rgba(34,211,238,0.25), 0 0 46px rgba(124,58,237,0.18);
+            --max: 1180px;
+            --gap: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Rajdhani", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--text);
+            background: radial-gradient(1200px 700px at 20% 10%, rgba(124,58,237,0.22), transparent 55%), radial-gradient(900px 600px at 80% 20%, rgba(34,211,238,0.18), transparent 60%), radial-gradient(700px 500px at 70% 80%, rgba(244,63,94,0.12), transparent 60%), var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* Subtle grid */
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 54px 54px;
+            mask-image: radial-gradient(circle at 50% 30%, rgba(0,0,0,0.95), transparent 70%);
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        /* Particles canvas */
+        #fx {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 44px));
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(14px);
+            background: linear-gradient(to bottom, rgba(7,9,20,0.86), rgba(7,9,20,0.40));
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: radial-gradient(circle at 30% 20%, rgba(34,211,238,0.9), transparent 55%), radial-gradient(circle at 70% 80%, rgba(124,58,237,0.9), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: var(--glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .logo::after {
+                content: "";
+                position: absolute;
+                inset: -60%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
+                transform: rotate(25deg);
+                animation: sweep 3.8s linear infinite;
+                opacity: 0.55;
+            }
+
+        @keyframes sweep {
+            0% {
+                transform: translateX(-35%) rotate(25deg);
+            }
+
+            100% {
+                transform: translateX(35%) rotate(25deg);
+            }
+        }
+
+        .navlinks {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+            .navlinks a {
+                padding: 8px 10px;
+                border-radius: 12px;
+                transition: 180ms ease;
+                position: relative;
+            }
+
+                .navlinks a:hover {
+                    color: var(--text);
+                    background: rgba(255,255,255,0.06);
+                    border: 1px solid rgba(255,255,255,0.10);
+                }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.06);
+            color: var(--text);
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            transition: 180ms ease;
+            box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+            cursor: pointer;
+            user-select: none;
+        }
+
+            .btn:hover {
+                transform: translateY(-1px);
+                border-color: rgba(255,255,255,0.22);
+                background: rgba(255,255,255,0.08);
+            }
+
+            .btn.primary {
+                border: none;
+                background: linear-gradient(135deg, rgba(34,211,238,0.9), rgba(124,58,237,0.9));
+                box-shadow: 0 18px 50px rgba(34,211,238,0.18), 0 18px 50px rgba(124,58,237,0.16);
+            }
+
+                .btn.primary:hover {
+                    filter: brightness(1.05);
+                }
+
+        .hamburger {
+            display: none;
+            width: 44px;
+            height: 42px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.06);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+            .hamburger span {
+                width: 18px;
+                height: 2px;
+                background: rgba(255,255,255,0.85);
+                display: block;
+                position: relative;
+            }
+
+                .hamburger span::before,
+                .hamburger span::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    width: 18px;
+                    height: 2px;
+                    background: rgba(255,255,255,0.85);
+                }
+
+                .hamburger span::before {
+                    top: -6px;
+                }
+
+                .hamburger span::after {
+                    top: 6px;
+                }
+
+        /* Hero */
+        .hero {
+            padding: 68px 0 28px;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 26px;
+            align-items: center;
+        }
+
+        .kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--muted);
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(34,211,238,1), rgba(124,58,237,1));
+            box-shadow: 0 0 18px rgba(34,211,238,0.35);
+        }
+
+        h1 {
+            margin: 14px 0 10px;
+            font-size: clamp(38px, 4vw, 58px);
+            line-height: 0.95;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--a2), var(--a1), var(--a3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .lead {
+            margin: 0 0 16px;
+            font-size: 18px;
+            line-height: 1.55;
+            color: var(--muted);
+            max-width: 62ch;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .stat {
+            padding: 10px 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+        }
+
+            .stat b {
+                display: block;
+                font-size: 18px;
+                letter-spacing: 0.4px;
+            }
+
+            .stat span {
+                display: block;
+                color: var(--muted);
+                font-weight: 600;
+                margin-top: 2px;
+                font-size: 14px;
+            }
+
+        /* Hero right card */
+        .showcase {
+            border-radius: 22px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: radial-gradient(520px 220px at 20% 20%, rgba(34,211,238,0.18), transparent 55%), radial-gradient(520px 220px at 80% 80%, rgba(124,58,237,0.18), transparent 55%), rgba(255,255,255,0.05);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+            min-height: 360px;
+        }
+
+            .showcase::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 55%), radial-gradient(circle at 30% 35%, rgba(244,63,94,0.14), transparent 55%);
+                opacity: 0.7;
+                pointer-events: none;
+            }
+
+        .showcase-inner {
+            position: relative;
+            padding: 18px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .chip {
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(0,0,0,0.18);
+            color: rgba(255,255,255,0.86);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+            .chip strong {
+                color: rgba(255,255,255,0.98);
+            }
+
+        .pulse {
+            position: absolute;
+            right: -120px;
+            top: -120px;
+            width: 280px;
+            height: 280px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(34,211,238,0.22), transparent 60%);
+            filter: blur(0.2px);
+            animation: breathe 3.6s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%,100% {
+                transform: scale(0.95);
+                opacity: 0.75;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+        }
+
+        .mini-ui {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .mini-card {
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            padding: 14px;
+        }
+
+            .mini-card .title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 0.6px;
+            }
+
+        .bar {
+            margin-top: 10px;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.10);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+            .bar > div {
+                height: 100%;
+                width: 70%;
+                border-radius: 999px;
+                background: linear-gradient(90deg, var(--a2), var(--a1));
+                box-shadow: 0 0 18px rgba(34,211,238,0.18);
+                animation: fill 2.6s ease-in-out infinite;
+            }
+
+        .mini-card:nth-child(2) .bar > div {
+            width: 86%;
+        }
+
+        .mini-card:nth-child(3) .bar > div {
+            width: 62%;
+        }
+
+        .mini-card:nth-child(4) .bar > div {
+            width: 78%;
+        }
+
+        @keyframes fill {
+            0%,100% {
+                filter: brightness(0.95);
+            }
+
+            50% {
+                filter: brightness(1.10);
+            }
+        }
+
+        .mini-card .sub {
+            margin-top: 6px;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 1.35;
+        }
+
+        /* Sections */
+        section {
+            padding: 42px 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 30px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-weight: 600;
+            max-width: 64ch;
+        }
+
+        .panel {
+            border-radius: var(--radius);
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            box-shadow: var(--shadow);
+        }
+
+        /* Store row */
+        .stores {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--gap);
+            margin-top: 18px;
+        }
+
+        .store {
+            padding: 16px 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.04);
+            transition: 180ms ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .store:hover {
+                transform: translateY(-2px);
+                border-color: rgba(255,255,255,0.22);
+                background: rgba(255,255,255,0.06);
+            }
+
+            .store .name {
+                font-weight: 900;
+                letter-spacing: 0.6px;
+                text-transform: uppercase;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .store .desc {
+                margin-top: 6px;
+                color: var(--muted);
+                font-weight: 600;
+                line-height: 1.4;
+                font-size: 14px;
+            }
+
+        .pill {
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.22);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.88);
+        }
+
+            .pill i {
+                width: 10px;
+                height: 10px;
+                border-radius: 999px;
+                background: linear-gradient(90deg, var(--a2), var(--a1));
+                box-shadow: 0 0 16px rgba(34,211,238,0.22);
+                display: inline-block;
+            }
+
+        /* Games grid */
+        .games {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--gap);
+            margin-top: 18px;
+        }
+
+        .game {
+            padding: 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: radial-gradient(420px 180px at 30% 15%, rgba(34,211,238,0.12), transparent 55%), rgba(255,255,255,0.05);
+            transition: 180ms ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .game:hover {
+                transform: translateY(-3px);
+                border-color: rgba(255,255,255,0.24);
+                background: radial-gradient(420px 180px at 30% 15%, rgba(124,58,237,0.14), transparent 55%), rgba(255,255,255,0.06);
+            }
+
+        .thumb {
+            height: 160px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)), radial-gradient(circle at 20% 30%, rgba(34,211,238,0.22), transparent 55%), radial-gradient(circle at 80% 70%, rgba(124,58,237,0.22), transparent 55%);
+            overflow: hidden;
+            position: relative;
+        }
+
+            .thumb::after {
+                content: "";
+                position: absolute;
+                inset: -50%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+                transform: rotate(25deg);
+                opacity: 0.55;
+                animation: sweep 5.2s linear infinite;
+            }
+
+        .game h3 {
+            margin: 12px 0 6px;
+            font-size: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .game p {
+            margin: 0 0 12px;
+            color: var(--muted);
+            font-weight: 600;
+            line-height: 1.45;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(0,0,0,0.22);
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .game .row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .linkbtn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.06);
+            font-weight: 900;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            font-size: 13px;
+            transition: 160ms ease;
+        }
+
+            .linkbtn:hover {
+                border-color: rgba(255,255,255,0.24);
+                background: rgba(255,255,255,0.08);
+                transform: translateY(-1px);
+            }
+
+            .linkbtn.meta {
+                border: none;
+                background: linear-gradient(135deg, rgba(244,63,94,0.86), rgba(124,58,237,0.86));
+            }
+
+        /* Tech */
+        .tech {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--gap);
+            margin-top: 18px;
+        }
+
+            .tech .box {
+                padding: 18px;
+                border-radius: 20px;
+                border: 1px solid rgba(255,255,255,0.12);
+                background: rgba(255,255,255,0.05);
+            }
+
+        .icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: radial-gradient(circle at 30% 20%, rgba(34,211,238,0.32), transparent 60%), radial-gradient(circle at 70% 80%, rgba(124,58,237,0.32), transparent 60%), rgba(255,255,255,0.06);
+            box-shadow: var(--glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .tech h4 {
+            margin: 10px 0 6px;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .tech p {
+            margin: 0;
+            color: var(--muted);
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* CTA panel */
+        .cta {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: var(--gap);
+            align-items: center;
+            padding: 20px;
+            border-radius: 22px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: radial-gradient(900px 250px at 20% 20%, rgba(34,211,238,0.18), transparent 55%), radial-gradient(900px 250px at 80% 80%, rgba(124,58,237,0.18), transparent 55%), rgba(255,255,255,0.05);
+            box-shadow: var(--shadow);
+        }
+
+            .cta h3 {
+                margin: 0 0 8px;
+                font-size: 24px;
+                letter-spacing: 0.6px;
+                text-transform: uppercase;
+            }
+
+            .cta p {
+                margin: 0;
+                color: var(--muted);
+                font-weight: 600;
+                line-height: 1.5;
+            }
+
+        .form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        input {
+            flex: 1;
+            min-width: 220px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(0,0,0,0.22);
+            color: var(--text);
+            outline: none;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+
+            input::placeholder {
+                color: rgba(255,255,255,0.48);
+                font-weight: 700;
+            }
+
+        .note {
+            margin-top: 10px;
+            color: rgba(255,255,255,0.60);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 26px 0 34px;
+            color: rgba(255,255,255,0.62);
+            border-top: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.12);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .social {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+            .social a {
+                padding: 10px 12px;
+                border-radius: 14px;
+                border: 1px solid rgba(255,255,255,0.12);
+                background: rgba(255,255,255,0.05);
+                color: rgba(255,255,255,0.82);
+                font-weight: 800;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+                font-size: 13px;
+            }
+
+                .social a:hover {
+                    border-color: rgba(255,255,255,0.22);
+                    background: rgba(255,255,255,0.07);
+                }
+
+        /* Reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: 700ms ease;
+            will-change: transform, opacity;
+        }
+
+            .reveal.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Mobile */
+        @media (max-width: 980px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase {
+                min-height: 320px;
+            }
+
+            .games {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stores {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tech {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                grid-template-columns: 1fr;
+            }
+
+            .form {
+                justify-content: flex-start;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .navlinks {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .actions .btn {
+                display: none;
+            }
+
+            .games {
+                grid-template-columns: 1fr;
+            }
+
+            .mini-ui {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            padding: 10px 0 16px;
+        }
+
+            .mobile-menu.open {
+                display: block;
+            }
+
+            .mobile-menu a {
+                display: block;
+                padding: 12px 10px;
+                border-radius: 14px;
+                border: 1px solid rgba(255,255,255,0.10);
+                background: rgba(255,255,255,0.05);
+                margin-top: 10px;
+                color: rgba(255,255,255,0.88);
+                font-weight: 800;
+                letter-spacing: 0.6px;
+                text-transform: uppercase;
+            }
+
+                .mobile-menu a:hover {
+                    background: rgba(255,255,255,0.07);
+                    border-color: rgba(255,255,255,0.18);
+                }
+    </style>
+</head>
+
+<body>
+    <canvas id="fx"></canvas>
+    <div class="grid-overlay"></div>
+
+    <header>
+        <div class="container">
+            <div class="nav">
+                <a class="brand" href="#top">
+                    <div class="logo">
+                        <img src="source/logo.png" alt="FusionEdge Games Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 14px;" />
+                    </div>
+                    <div>
+                        FusionEdge <span class="gradient-text">Games</span>
+                    </div>
+                </a>
+
+                <nav class="navlinks" aria-label="Primary">
+                    <a href="#games">Games</a>
+                    <a href="#platforms">Platforms</a>
+                    <a href="#tech">Tech</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+
+                <div class="actions">
+                    <a class="btn" href="#games">Explore</a>
+                    <a class="btn primary" href="#contact">Work With Us</a>
+                    <button class="hamburger" id="hamburger" aria-label="Open menu">
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+                <a href="#games">Games</a>
+                <a href="#platforms">Platforms</a>
+                <a href="#tech">Tech</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="top">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="reveal">
+                        <div class="kicker">
+                            <span class="dot" aria-hidden="true"></span>
+                            Next-Gen Mobile + VR Studio
+                        </div>
+
+                        <h1>
+                            Build. Ship. Evolve. <br />
+                            <span class="gradient-text">Immersive Games</span> with an edge.
+                        </h1>
+
+                        <p class="lead">
+                            FusionEdge Games is a tech-forward gaming company creating high-performance experiences for
+                            Play Store, App Store, Amazon Appstore, and Meta Store. From fast mobile action to VR immersion,
+                            we ship polished gameplay with modern pipelines and constant iteration.
+                        </p>
+
+                        <div class="hero-cta">
+                            <a class="btn primary" href="#games">View Our Games</a>
+                            <a class="btn" href="#platforms">See Platforms</a>
+                            <a class="btn" href="#tech">Our Tech Stack</a>
+                        </div>
+
+                        <div class="stats">
+                            <div class="stat">
+                                <b>Multi-Store</b>
+                                <span>Play Store • App Store • Amazon • Meta</span>
+                            </div>
+                            <div class="stat">
+                                <b>VR-Ready</b>
+                                <span>Meta Quest pipelines + performance focus</span>
+                            </div>
+                            <div class="stat">
+                                <b>Live Ops</b>
+                                <span>Updates, events, optimization, analytics</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase reveal" aria-label="Studio status panel">
+                        <div class="pulse" aria-hidden="true"></div>
+
+                        <div class="showcase-inner">
+                            <div class="badge-row">
+                                <div class="chip"><strong>Live</strong> Builds</div>
+                                <div class="chip"><strong>VR</strong> Experiences</div>
+                                <div class="chip"><strong>Performance</strong> First</div>
+                            </div>
+
+                            <div class="mini-ui">
+                             <!--   <div class="mini-card">
+                                    <div class="title">Render Budget <span class="tag">Stable</span></div>
+                                    <div class="bar"><div></div></div>
+                                    <div class="sub">Optimized frames for smooth mobile + VR.</div>
+                                </div>
+-->                          <div class="mini-card">
+                                    <div class="title">Fidget Master</div>
+                                    <video controls style="width: 100%; border-radius: 16px;">
+                                        <source src="source/vid1.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                
+                                <div class="mini-card">
+                                 <div class="title">Sort My Potion </div>
+                                     <video controls style="width: 100%; border-radius: 16px;">
+                                        <source src="source/vid2.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                
+                                <div class="mini-card">
+                                    <div class="title">XR Pipeline <span class="tag">Quest</span></div>
+                                    <div class="bar"><div></div></div>
+                                    <div class="sub">Fast iteration + build automation workflows.</div>
+                                </div>
+
+                                <div class="mini-card">
+                                    <div class="title">Quality <span class="tag">Polish</span></div>
+                                    <div class="bar"><div></div></div>
+                                    <div class="sub">UX, accessibility, store optimization, stability.</div>
+                                </div>
+
+                               
+                            </div>
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PLATFORMS -->
+        <section id="platforms">
+            <div class="container">
+                <div class="section-title reveal">
+                    <div>
+                        <h2>Available on</h2>
+                        <div class="hint">We publish and maintain games across major storefronts—optimized per platform requirements.</div>
+                    </div>
+                </div>
+
+                <div class="stores reveal">
+                    <a class="store" href="https://play.google.com/store/apps/dev?id=8328385256715350481" target="_blank" rel="noopener">
+                        <div class="name">Google Play</div>
+                        <div class="desc">Android releases + live updates, performance tuning, monetization.</div>
+                        <div class="pill"><i></i> Play Store</div>
+                    </a>
+
+                    <a class="store" href="https://apps.apple.com/us/developer/muhammad-talha-nasir/id1823734626" target="_blank" rel="noopener">
+                        <div class="name">Apple App Store</div>
+                        <div class="desc">iOS builds, high polish, device coverage, stable UX and QA.</div>
+                        <div class="pill"><i></i> App Store</div>
+                    </a>
+
+                    <a class="store" href="https://www.amazon.com/Fidget-Master-Anti-Stress-Relaxing-Games/dp/B0F1KXY68R/ref=sr_1_1?dib=eyJ2IjoiMSJ9.kPX84aSzRR-w9rqxmBW6vw.NF8-3LvwNMdiex3sRy-dfff9NxrN3XhdlLArnTY-erQ&dib_tag=se&qid=1767090222&refinements=p_4%3AFusionEdge+Games&s=mobile-apps&search-type=ss&sr=1-1" target="_blank" rel="noopener">
+                        <div class="name">Amazon Appstore</div>
+                        <div class="desc">Wider reach with tailored distribution and storefront metadata.</div>
+                        <div class="pill"><i></i> Amazon Store</div>
+                    </a>
+
+                    <a class="store" href="https://www.meta.com/experiences/vr-cricket-pro-ultimate-challenges-2026/26397948149794536/?require_login=true" target="_blank" rel="noopener">
+                        <div class="name">Meta Store</div>
+                        <div class="desc">Immersive VR experiences—Quest-ready builds and performance budgets.</div>
+                        <div class="pill"><i></i> Meta Store</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- GAMES -->
+        <section id="games">
+            <div class="container">
+                <div class="section-title reveal">
+                    <div>
+                        <h2>Our Games</h2>
+                      
+                    </div>
+ 
+                </div>
+
+                <div class="games">
+                    <!-- GAME CARD 1 -->
+                    <article class="game reveal">
+                        <div class="thumb" aria-label="Game cover placeholder">
+                            <img src="source/fidget.png" alt="Fidget Master Cover" style="width:100%; height:100%; object-fit:cover; border-radius:16px;" />
+                        </div>
+                        <h3>Fidget Master: Relaxing Games</h3>
+                        <p>
+                            Fidget Master – 30 Mini-Games for Stress Relief &amp; Fun<br><br>
+                            Unwind and de-stress with Fidget Master, now packed with 30 satisfying mini-games! Whether you’re spinning, popping, tapping, or playing music, each activity is designed to help you relax, focus, and have fun. With smoother performance, improved stability, and exciting new games, Fidget Master is better than ever.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">Casual</span>
+                            <span class="tag">Mini-Games</span>
+                            <span class="tag">Relaxing</span>
+                        </div> 
+                        <div class="row">
+                            <a class="linkbtn" href="https://play.google.com/store/apps/details?id=com.FusionEdge.FidgetMaster" target="_blank" rel="noopener">Play Store</a>
+                             <a class="linkbtn" href="https://apps.apple.com/ca/app/fidget-master-relaxing-games/id6747991445" target="_blank" rel="noopener">App Store</a>
+                        </div>
+                    </article>
+
+                    <!-- GAME CARD 2 -->
+                    <article class="game reveal">
+                        <div class="thumb" aria-label="Game cover placeholder">
+                         <img src="source/wild-run.png" alt="Wild Run: Multi Ride 3D Cover" style="width:100%; height:100%; object-fit:cover; border-radius:16px;" />
+                        </div>
+                        <h3>Wild Run: Multi Ride 3D</h3>
+                        <p>Choose your ride and outrun the chase in Wild Run: Multi Ride 3D, a fast, high-intensity endless runner where you switch vehicles on the fly to master every terrain. Run, ride, dash, and escape across jungle, city, and offroad routes while you collect coins, chain power-ups, complete missions, and climb leaderboards. This is a wild run built for speed, variety, and replayability.</p>
+                        <div class="tags">
+                            <span class="tag">Action</span>
+                            <span class="tag">Arcade</span>
+                          
+                        </div>
+                        <div class="row">
+                            <a class="linkbtn" href="https://play.google.com/store/apps/details?id=com.FusionEdge.WildRun" target="_blank" rel="noopener">Play Store</a>
+                        </div>
+                    </article>
+
+                    <!-- GAME CARD 3 -->
+                    <article class="game reveal">
+                        <div class="thumb" aria-label="Game cover placeholder">
+                         <img src="source/sort-my-potion.png" alt="Sort My Potion Cover" style="width:100%; height:100%; object-fit:cover; border-radius:16px;" />
+                        </div>
+                        <h3>Sort My Potion</h3>
+                        <p>Dive into a magical world of sorting!
+                            Sort My Potion is a fun and relaxing puzzle game where you match and organize colorful potions by shape and color. Complete levels to earn rewards. Unlock and build beautiful cities as you grow through increasingly challenging puzzles. With enchanting visuals and satisfying gameplay, challenge your brain with hexagons, circles, squares, and pentagons in a truly spellbinding experience!</p>
+                        <div class="tags">
+                            <span class="tag">Puzzle</span>
+                            <span class="tag">casual</span>
+                          
+                        </div>
+                        <div class="row">
+                            <a class="linkbtn meta" href="https://play.google.com/store/apps/details?id=com.fusionedge.sortmypotion" target="_blank" rel="noopener">Play Store</a>
+                        </div>
+                    </article>
+
+                    <!-- GAME CARD 4 -->
+                    <article class="game reveal">
+                        <div class="thumb" aria-label="Game cover placeholder">
+                         <img src="source/meta-cricket.png" alt="VR Cricket Pro: Ultimate Challenges 2026" style="width:100%; height:115%; object-fit:cover; border-radius:16px;" />
+                        </div>
+                        <h3>VR Cricket Pro: Ultimate Challenges 2026</h3>
+                        <p>Step into the crease and experience cricket in virtual reality.
+                            VR Cricket Pro: Ultimate Challenges 2026 is a VR cricket experience focused on skill-based gameplay, designed specifically for VR headsets. The game places you inside the stadium, giving you direct control over batting actions.</p>
+                        <div class="tags">
+                            <span class="tag">ImmersiveSports</span>
+                            <span class="tag">VRCricket</span>
+                            <span class="tag">VRBating</span>
+                        </div>
+                 <div class="row">
+                            <a class="linkbtn meta" href="https://www.meta.com/experiences/vr-cricket-pro-ultimate-challenges-2026/26397948149794536" target="_blank" rel="noopener">Meta Store</a>
+                        </div>
+                    </article>
+                    
+                    <!-- GAME CARD 5 -->
+                    <!--
+                    <article class="game reveal">
+                        <div class="thumb" aria-label="Game cover placeholder"></div>
+                        <h3>Skyline Sprint</h3>
+                        <p>Stylized city chase with slick animations, satisfying collisions, and collectible routes.</p>
+                        <div class="tags">
+                            <span class="tag">Casual</span>
+                            <span class="tag">Chase</span>
+                            <span class="tag">3D</span>
+                        </div>
+                        <div class="row">
+                            <a class="linkbtn" href="#" target="_blank" rel="noopener">Play Store</a>
+                            <a class="linkbtn" href="#" target="_blank" rel="noopener">App Store</a>
+                            <a class="linkbtn" href="#" target="_blank" rel="noopener">Amazon</a>
+                        </div>
+                    </article>
+                    -->
+
+                    <!-- GAME CARD 6 -->
+                    <!--
+                    <article class="game reveal">
+                        <div class="thumb" aria-label="Game cover placeholder"></div>
+                        <h3>ProtoLab VR: Arena</h3>
+                        <p>Experimental VR gameplay—rapid prototyping, strong UX, and comfort-first design.</p>
+                        <div class="tags">
+                            <span class="tag">VR</span>
+                            <span class="tag">Prototype</span>
+                            <span class="tag">R&D</span>
+                        </div>
+                        <div class="row">
+                            <a class="linkbtn meta" href="#" target="_blank" rel="noopener">Meta Store</a>
+                        </div>
+                    </article>
+                    -->
+                  
+                </div>
+            </div>
+        </section>
+
+        <!-- TECH -->
+        <section id="tech">
+            <div class="container">
+                <div class="section-title reveal">
+                    <div>
+                        <h2>Tech & Capabilities</h2>
+                        <div class="hint">
+                            We focus on modern workflows: VR performance budgets, clean UI, build automation, and live ops optimization.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech">
+                    <div class="box reveal">
+                        <div class="icon">VR</div>
+                        <h4>VR Performance & Comfort</h4>
+                        <p>
+                            Stable frame pacing, optimized rendering, thoughtful locomotion, and comfort-first design for immersive play.
+                        </p>
+                    </div>
+
+                    <div class="box reveal">
+                        <div class="icon">UX</div>
+                        <h4>Polished UI/UX</h4>
+                        <p>
+                            Responsive layouts, clear feedback, accessibility-aware visuals, and a player-first experience across devices.
+                        </p>
+                    </div>
+
+                    <div class="box reveal">
+                        <div class="icon">OPS</div>
+                        <h4>Live Ops & Analytics</h4>
+                        <p>
+                            Updates, events, content drops, retention tuning, A/B testing, and iterative improvements from real player data.
+                        </p>
+                    </div>
+
+                    <div class="box reveal">
+                        <div class="icon">CI</div>
+                        <h4>Automation & Shipping</h4>
+                        <p>
+                            Build pipelines, store compliance checks, asset workflows, and fast iteration so features ship without drama.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about">
+            <div class="container">
+                <div class="section-title reveal">
+                    <div>
+                        <h2>About FusionEdge Games</h2>
+                        <div class="hint">
+                            We blend creativity with engineering to ship games that feel great to play and scale across platforms.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel reveal" style="padding:18px;">
+                    <p style="margin:0; color: var(--muted); font-weight: 600; line-height: 1.6;">
+                        At FusionEdge Games, we build experiences with strong gameplay feel, clean visuals, and modern technology.
+                        Our team ships and maintains multiple titles across Play Store, App Store, Amazon Appstore, and Meta Store.
+                        We care about performance, polish, and continuous improvement—because players notice the details.
+                    </p>
+
+                    <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+                        <span class="pill"><i></i> Multi-platform releases</span>
+                        <span class="pill"><i></i> VR + Mobile pipelines</span>
+                        <span class="pill"><i></i> Optimized performance budgets</span>
+                        <span class="pill"><i></i> Store-ready polish & QA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT / CTA -->
+        <section id="contact">
+            <div class="container">
+                <div class="cta reveal">
+                    <div>
+                        <h3>Want to publish, partner, or build something immersive?</h3>
+                        <p>
+                            Drop your email and we’ll reach out. You can also link your studio socials in the footer.
+                        </p>
+                        <div class="note">This demo form is front-end only. Hook it to your backend or email service later.</div>
+                    </div>
+
+                    <form class="form" id="contactForm">
+                        <input type="email" id="email" placeholder="Your email (e.g., studio@fusionedgegames.com)" required />
+                        <button class="btn primary" type="submit">Notify Me</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="logo" aria-hidden="true" style="width:34px; height:34px; border-radius:14px;">
+                        <div class="logo">
+                            <img src="source/logo.png" alt="FusionEdge Games Logo" style="width: 80%; height: 90%; object-fit: contain; border-radius: 14px;" />
+                        </div>
+                        </div>
+                        <div style="font-weight:900; letter-spacing:0.6px; text-transform:uppercase;">
+                            FusionEdge <span class="gradient-text">Games</span>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;">
+                        © <span id="year"></span> FusionEdge Games. All rights reserved.
+                    </div>
+                </div>
+
+                <div class="social" aria-label="Social links">
+                    <a href="http://www.youtube.com/@FusionEdgeGames" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://www.tiktok.com/@fusionedge.games" target="_blank" rel="noopener">TikTok</a>
+                    <!--
+                    <a href="#" target="_blank" rel="noopener">Instagram</a>
+                    <a href="#" target="_blank" rel="noopener">Discord</a>
+                    -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener("click", (e) => {
+                const id = a.getAttribute("href");
+                if (!id || id === "#") return;
+                const el = document.querySelector(id);
+                if (!el) return;
+                e.preventDefault();
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+                // close mobile menu if open
+                mobileMenu.classList.remove("open");
+            });
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobileMenu");
+        hamburger?.addEventListener("click", () => {
+            mobileMenu.classList.toggle("open");
+        });
+
+        // Reveal on scroll
+        const reveals = Array.from(document.querySelectorAll(".reveal"));
+        const io = new IntersectionObserver((entries) => {
+            for (const e of entries) {
+                if (e.isIntersecting) {
+                    e.target.classList.add("show");
+                    io.unobserve(e.target);
+                }
+            }
+        }, { threshold: 0.12 });
+        reveals.forEach(el => io.observe(el));
+
+        // Contact demo (front-end only)
+        const form = document.getElementById("contactForm");
+        form?.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value.trim();
+            if (!email) return;
+
+            // Simple toast-like feedback
+            const btn = form.querySelector("button");
+            const old = btn.textContent;
+            btn.textContent = "Saved";
+            btn.style.filter = "brightness(1.08)";
+            setTimeout(() => {
+                btn.textContent = old;
+                btn.style.filter = "";
+            }, 1400);
+
+            // TODO: Send to backend / Firebase function / Mailchimp etc.
+            console.log("Captured email:", email);
+            form.reset();
+        });
+
+        // Footer year
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Particle FX canvas (lightweight)
+        const canvas = document.getElementById("fx");
+        const ctx = canvas.getContext("2d");
+
+        let w, h, dpr;
+        function resize() {
+            dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+            w = canvas.width = Math.floor(window.innerWidth * dpr);
+            h = canvas.height = Math.floor(window.innerHeight * dpr);
+            canvas.style.width = window.innerWidth + "px";
+            canvas.style.height = window.innerHeight + "px";
+        }
+        window.addEventListener("resize", resize);
+        resize();
+
+        const rand = (min, max) => min + Math.random() * (max - min);
+
+        const particles = Array.from({ length: 70 }, () => ({
+            x: rand(0, 1),
+            y: rand(0, 1),
+            r: rand(0.6, 1.8),
+            vx: rand(-0.08, 0.08),
+            vy: rand(-0.05, 0.05),
+            a: rand(0.18, 0.55)
+        }));
+
+        function draw() {
+            ctx.clearRect(0, 0, w, h);
+
+            // subtle vignette
+            const g = ctx.createRadialGradient(w * 0.5, h * 0.35, 0, w * 0.5, h * 0.35, Math.max(w, h) * 0.7);
+            g.addColorStop(0, "rgba(0,0,0,0)");
+            g.addColorStop(1, "rgba(0,0,0,0.35)");
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, w, h);
+
+            // particles
+            for (const p of particles) {
+                p.x += p.vx * 0.0025;
+                p.y += p.vy * 0.0025;
+
+                if (p.x < -0.05) p.x = 1.05;
+                if (p.x > 1.05) p.x = -0.05;
+                if (p.y < -0.05) p.y = 1.05;
+                if (p.y > 1.05) p.y = -0.05;
+
+                const x = p.x * w;
+                const y = p.y * h;
+
+                // glow dot
+                ctx.beginPath();
+                ctx.arc(x, y, p.r * dpr, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(34,211,238,${p.a})`;
+                ctx.fill();
+
+                // soft link lines (nearby)
+                for (const q of particles) {
+                    if (q === p) continue;
+                    const dx = (q.x - p.x) * w;
+                    const dy = (q.y - p.y) * h;
+                    const dist = Math.hypot(dx, dy);
+                    if (dist < 160 * dpr) {
+                        const alpha = (1 - dist / (160 * dpr)) * 0.08;
+                        ctx.strokeStyle = `rgba(124,58,237,${alpha})`;
+                        ctx.lineWidth = 1 * dpr;
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(q.x * w, q.y * h);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy for VR Cricket Pro: Ultimate Challenges 2026</title>
+
+    <meta name="description" content="Privacy Policy for VR Cricket Pro: Ultimate Challenges 2026 on Meta Quest platform." />
+    <meta name="theme-color" content="#0a0b14" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="source/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="source/favicon.ico" type="image/x-icon">
+
+    <!-- Optional PNG fallback -->
+    <link rel="icon" type="image/png" sizes="32x32" href="source/logo.png">
+
+    <style>
+        :root {
+            --bg: #070914;
+            --panel: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.12);
+            --text: rgba(255,255,255,0.95);
+            --muted: rgba(255,255,255,0.65);
+            --accent1: #22d3ee;
+            --accent2: #7c3aed;
+            --radius: 18px;
+            --max: 920px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: "Rajdhani",system-ui,Segoe UI,Roboto;
+            color: var(--text);
+            background: radial-gradient(900px 500px at 20% 10%, rgba(124,58,237,.18), transparent 60%), radial-gradient(900px 500px at 80% 20%, rgba(34,211,238,.18), transparent 60%), var(--bg);
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(7,9,20,.9);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            z-index: 10;
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 32px));
+            margin: auto;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+        }
+
+        .logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 14px;
+            background: radial-gradient(circle at 30% 30%, var(--accent1), transparent 55%), radial-gradient(circle at 70% 70%, var(--accent2), transparent 55%);
+            border: 1px solid var(--border);
+        }
+
+        main {
+            padding: 48px 0 64px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg,var(--accent1),var(--accent2));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 22px;
+        }
+
+        p, li {
+            color: var(--muted);
+            font-weight: 600;
+            line-height: 1.65;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px 0 36px;
+            background: rgba(0,0,0,.2);
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--accent1);
+            text-decoration: none
+        }
+
+            a:hover {
+                text-decoration: underline
+            }
+
+        @media(max-width:640px) {
+            h1 {
+                font-size: 32px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav">
+            <div class="logo"></div>
+            <div>VR Cricket Pro: Privacy Policy</div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <h1>Privacy Policy</h1>
+
+            <div class="subtitle">
+                Effective Date: 16 December 2026<br>
+                VR Cricket Pro: Ultimate Challenges 2026
+            </div>
+
+            <div class="panel">
+                <p>
+                    VR Cricket Pro: Ultimate Challenges 2026
+                </p>
+                <p>
+                    VR Cricket Pro: Ultimate Challenges 2026 is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect information when you use our virtual reality game available on the Meta Quest platform.
+                </p>
+                <p>
+                    By downloading, installing, or using the Game, you agree to the practices described in this Privacy Policy.
+                </p>
+            </div>
+
+            <div class="panel">
+                <h2>1. Information We Collect</h2>
+                <p>We collect only the minimum information necessary to operate and improve the Game.</p>
+
+                <h3>1.1 Information Collected Automatically</h3>
+                <p>When you use the Game, the following information may be collected automatically via the Meta platform:</p>
+                <ul>
+                    <li>Device information (headset model, OS version)</li>
+                    <li>Platform identifiers provided by Meta</li>
+                    <li>Gameplay data (progress, scores, achievements, in-game settings)</li>
+                    <li>Crash reports and performance diagnostics</li>
+                </ul>
+
+                <h3>1.2 Information Collected by Meta</h3>
+                <p>The Game operates within Meta's ecosystem. Meta may independently collect:</p>
+                <ul>
+                    <li>Account and profile information</li>
+                    <li>Usage analytics</li>
+                    <li>Social interactions (if enabled)</li>
+                </ul>
+                <p>
+                    This data is processed under Meta's Privacy Policy. We do not receive or store personal account details unless explicitly provided by Meta's developer APIs.
+                </p>
+
+                <h3>1.3 Information We Do Not Collect</h3>
+                <p>We do not intentionally collect:</p>
+                <ul>
+                    <li>Real names, email addresses, or phone numbers</li>
+                    <li>Payment or financial information</li>
+                    <li>Biometric data (eye tracking, facial data, voice recordings)</li>
+                    <li>Precise location data</li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h2>2. How We Use Information</h2>
+                <p>Collected data is used solely to:</p>
+                <ul>
+                    <li>Operate and maintain the Game</li>
+                    <li>Save progress and preferences</li>
+                    <li>Improve gameplay quality, performance, and stability</li>
+                    <li>Diagnose bugs and technical issues</li>
+                    <li>Comply with platform and legal requirements</li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h2>3. Data Sharing and Disclosure</h2>
+                <p>We do not sell, rent, or trade user data.</p>
+                <p>Data may be shared only in these limited cases:</p>
+                <ul>
+                    <li>Service Providers: Trusted providers assisting with analytics or crash reporting under confidentiality obligations</li>
+                    <li>Legal Compliance: When required by law or legal process</li>
+                    <li>Platform Operations: As required to function within the Meta platform</li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h2>4. Data Storage and Security</h2>
+                <ul>
+                    <li>Gameplay and technical data may be stored locally on your device or on secure servers</li>
+                    <li>We use reasonable technical and organizational safeguards to protect data</li>
+                    <li>No digital storage system can be guaranteed 100% secure</li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h2>5. Children's Privacy</h2>
+                <p>
+                    The Game is not intended for users below the minimum age defined by Meta�s platform policies.
+                </p>
+                <p>
+                    We do not knowingly collect personal data from children. If you believe a child has provided personal information, please contact us immediately so we can delete it.
+                </p>
+            </div>
+
+            <div class="panel">
+                <h2>6. Third-Party Services</h2>
+                <p>
+                    The Game may use third-party services (e.g., analytics or crash reporting). These services are governed by their own privacy policies. We encourage users to review them where applicable.
+                </p>
+            </div>
+
+            <div class="panel">
+                <h2>7. User Rights (Applies to All Users Worldwide)</h2>
+                <p>All users, regardless of geographic location, have the following rights:</p>
+                <ul>
+                    <li>Right to Access: Request access to gameplay or technical data we store</li>
+                    <li>Right to Deletion: Request deletion of any data associated with your use of the Game</li>
+                    <li>Right to Restriction: Request limitation of certain data processing where applicable</li>
+                </ul>
+                <p>
+                    To exercise these rights, contact us using the details below.
+                    Please note that some data may be controlled directly by Meta and must be managed through your Meta account settings.
+                </p>
+            </div>
+
+            <div class="panel">
+                <h2>8. Changes to This Privacy Policy</h2>
+                <p>
+                    We may update this Privacy Policy periodically. Updates take effect immediately upon posting. Continued use of the Game indicates acceptance of the revised policy.
+                </p>
+            </div>
+
+            <div class="panel">
+                <h2>9. Contact Information</h2>
+                <p>
+                    For privacy questions, data access, or deletion requests, contact:
+                </p>
+                <p>
+                    Email: <a href="mailto:talhagamedev01@gmail.com">talhagamedev01@gmail.com</a>
+                </p>
+                <p>
+                    VR Cricket Pro: Ultimate Challenges 2026<br>
+                    We are committed to transparency and protecting your privacy.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            � 2026 VR Cricket Pro: Ultimate Challenges 2026. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
